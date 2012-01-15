@@ -18,7 +18,7 @@ include('includes/inject_cookie.php');
 </head>
 <body>
 <center><h1>SQLol - Custom query</h1></center><br>
-<?
+<?php
 include('includes/nav.inc.php');
 ?>
 
@@ -26,7 +26,7 @@ include('includes/nav.inc.php');
 	</table>
 <input type="submit" name="submit" value="Inject!">
 
-<?
+<?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 		
 	$query = str_replace('*INJECT*', $sqlol_vars['inject_string'], $sqlol_vars['location']);

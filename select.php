@@ -18,7 +18,7 @@ include('includes/inject_cookie.php');
 </head>
 <body>
 <center><h1>SQLol - SELECT query</h1></center><br>
-<?
+<?php
 include('includes/nav.inc.php');
 ?>
 
@@ -36,7 +36,7 @@ include('includes/nav.inc.php');
 	</table>
 <input type="submit" name="submit" value="Inject!">
 
-<?
+<?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
 	if($sqlol_vars['location'] == 'entire_query'){//If we're injecting an entire query (SQLi as a feature, seems unrealistic but I've seen it more than once) then let's not waste cycles building the query.

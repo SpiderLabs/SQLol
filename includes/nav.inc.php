@@ -39,7 +39,7 @@ if(isset($_COOKIE['method'])){
 }
 ?>">
 <table>
-<?
+<?php
 if (!isset($_COOKIE['method']) or $_COOKIE['method']!='cookie'){
 	echo '<tr><td>Injection String:</td><td><input type="text" name="inject_string"></td></tr>';
 }
@@ -70,7 +70,7 @@ if (!isset($_COOKIE['method']) or $_COOKIE['method']!='cookie'){
 		<option value="none">No error messages</option>
 	</select></td></tr>
 	<tr><td>Show Query:</td><td><input type="checkbox" name="show_query" value="on"></td></tr>
-<?
+<?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
 	switch($_COOKIE['method']){//Determine how variables are being submitted

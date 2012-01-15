@@ -18,7 +18,7 @@ include('includes/inject_cookie.php');
 </head>
 <body>
 <center><h1>SQLol - INSERT query</h1></center><br>
-<?
+<?php
 include('includes/nav.inc.php');
 ?>
 
@@ -32,7 +32,7 @@ include('includes/nav.inc.php');
 	
 <input type="submit" name="submit" value="Inject!">
 
-<?
+<?php
 if(isset($_REQUEST['submit'])){ //Injection time!
 				
 	$display_column_name = $column_name = 'username, isadmin';
