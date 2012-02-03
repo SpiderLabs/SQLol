@@ -10,7 +10,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-include('includes/inject_cookie.php');
 ?>
 <html>
 <head>
@@ -39,10 +38,10 @@ include('includes/nav.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
-	if($sqlol_vars['location'] == 'entire_query'){//If we're injecting an entire query (SQLi as a feature, seems unrealistic but I've seen it more than once) then let's not waste cycles building the query.
+	if($_REQUEST['location'] == 'entire_query'){//If we're injecting an entire query (SQLi as a feature, seems unrealistic but I've seen it more than once) then let's not waste cycles building the query.
 		
-		$query = $sqlol_vars['inject_string'];
-		if(isset($sqlol_vars['show_query']) and $sqlol_vars['show_query']=='on') $displayquery = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+		$query = $_REQUEST['inject_string'];
+		if(isset($_REQUEST['show_query']) and $_REQUEST['show_query']=='on') $displayquery = '<u>' . $_REQUEST['inject_string'] . '</u>';
 		
 	} else { //Otherwise, define all the parts of the query and replace only the portion we're injecting into.
 		
@@ -53,34 +52,34 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 		$display_order_by_clause = $order_by_clause = 'ORDER BY username ASC';
 		$display_having_clause = $having_clause = 'HAVING 1 = 1';
 	
-		switch ($sqlol_vars['location']){
+		switch ($_REQUEST['location']){
 			case 'column_name':
-				$column_name = $sqlol_vars['inject_string'];
-				$display_column_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+				$column_name = $_REQUEST['inject_string'];
+				$display_column_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 				break;
 			case 'table_name':
-				$table_name = $sqlol_vars['inject_string'];
-				$display_table_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+				$table_name = $_REQUEST['inject_string'];
+				$display_table_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 				break;
 			case 'where_string':
-				$where_clause = "WHERE username = '" . $sqlol_vars['inject_string'] . "'";
-				$display_where_clause = "WHERE username = '" . '<u>' . $sqlol_vars['inject_string'] . '</u>' . "'";
+				$where_clause = "WHERE username = '" . $_REQUEST['inject_string'] . "'";
+				$display_where_clause = "WHERE username = '" . '<u>' . $_REQUEST['inject_string'] . '</u>' . "'";
 				break;
 			case 'where_int':
-				$where_clause = 'WHERE isadmin = ' . $sqlol_vars['inject_string'];
-				$display_where_clause = 'WHERE isadmin = ' . '<u>' . $sqlol_vars['inject_string'] . '</u>';
+				$where_clause = 'WHERE isadmin = ' . $_REQUEST['inject_string'];
+				$display_where_clause = 'WHERE isadmin = ' . '<u>' . $_REQUEST['inject_string'] . '</u>';
 				break;
 			case 'group_by':
-				$group_by_clause = 'GROUP BY ' . $sqlol_vars['inject_string'];
-				$display_group_by_clause = 'GROUP BY ' . '<u>' . $sqlol_vars['inject_string'] . '</u>';
+				$group_by_clause = 'GROUP BY ' . $_REQUEST['inject_string'];
+				$display_group_by_clause = 'GROUP BY ' . '<u>' . $_REQUEST['inject_string'] . '</u>';
 				break;
 			case 'order_by':
-				$order_by_clause = 'ORDER BY ' . $sqlol_vars['inject_string'] . ' ASC';
-				$display_order_by_clause = 'ORDER BY ' . '<u>' . $sqlol_vars['inject_string'] . '</u>' . ' ASC';
+				$order_by_clause = 'ORDER BY ' . $_REQUEST['inject_string'] . ' ASC';
+				$display_order_by_clause = 'ORDER BY ' . '<u>' . $_REQUEST['inject_string'] . '</u>' . ' ASC';
 				break;
 			case 'having':
-				$having_clause = 'HAVING isadmin = ' . $sqlol_vars['inject_string'];
-				$display_having_clause = 'HAVING isadmin = ' . '<u>' . $sqlol_vars['inject_string'] . '</u>';
+				$having_clause = 'HAVING isadmin = ' . $_REQUEST['inject_string'];
+				$display_having_clause = 'HAVING isadmin = ' . '<u>' . $_REQUEST['inject_string'] . '</u>';
 				break;
 		}
 		

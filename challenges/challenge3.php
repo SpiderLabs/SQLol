@@ -10,13 +10,13 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-setcookie('method', 'post'); ?>
+?>
 <html>
 <head>
-	<title>SQLol - Challenge 3 - Row, Row, Row Your Boat</title>
+	<title>SQLol - Challenge 3 - Death Row</title>
 </head>
 <body>
-	<center><h1>SQLol - Challenge 3 - Row, Row, Row Your Boat</h1></center><br>
+	<center><h1>SQLol - Challenge 3 - Death Row</h1></center><br>
 
 	<hr width="40%">
 	<hr width="60%">

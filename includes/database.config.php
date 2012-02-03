@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 //Choose the appropriate type of database here
 
-/*//Choose me for MySQL
+//Choose me for MySQL
 $dbtype = 'mysql';
 $server = 'localhost';
 $port = '3306';
@@ -23,7 +23,7 @@ $database = 'sqlol';
 $persist = '';
 
 $hostspec = $username.':'.$password.'@'.$server.':'.$port;
-*/
+
 
 /*//Choose me for PostgreSQL
 $dbtype = 'postgres';
@@ -37,11 +37,11 @@ $persist = '';
 $hostspec = $username.':'.$password.'@'.$server.':'.$port;
 */
 
-//Choose me for SQLite
+/*//Choose me for SQLite
 $dbtype = 'sqlite';
 $hostspec = urlencode('c:\path\to\sqlite.db');
 $database = ''; //Keep this value set to null for SQLite
 $persist = ''; //Don't persist, SQLite is bad at concurrent connections
-
+*/
 
 ?>

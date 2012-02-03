@@ -10,7 +10,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-include('includes/inject_cookie.php');
 ?>
 <html>
 <head>
@@ -41,26 +40,26 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 	$display_value = $value = 'haxotron9000';
 	$display_where_clause = $where_clause = 'WHERE isadmin = 0';
 
-	switch ($sqlol_vars['location']){
+	switch ($_REQUEST['location']){
 		case 'column_name':
-			$column_name = $sqlol_vars['inject_string'];
-			$display_column_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$column_name = $_REQUEST['inject_string'];
+			$display_column_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'table_name':
-			$table_name = $sqlol_vars['inject_string'];
-			$display_table_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$table_name = $_REQUEST['inject_string'];
+			$display_table_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'value':
-			$value = $sqlol_vars['inject_string'];
-			$display_value = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$value = $_REQUEST['inject_string'];
+			$display_value = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'where_string':
-			$where_clause = "WHERE username = '" . $sqlol_vars['inject_string'] . "'";
-			$display_where_clause = "WHERE username = '" . '<u>' . $sqlol_vars['inject_string'] . '</u>' . "'";
+			$where_clause = "WHERE username = '" . $_REQUEST['inject_string'] . "'";
+			$display_where_clause = "WHERE username = '" . '<u>' . $_REQUEST['inject_string'] . '</u>' . "'";
 			break;
 		case 'where_int':
-			$where_clause = 'WHERE isadmin = ' . $sqlol_vars['inject_string'];
-			$display_where_clause = 'WHERE isadmin = ' . '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$where_clause = 'WHERE isadmin = ' . $_REQUEST['inject_string'];
+			$display_where_clause = 'WHERE isadmin = ' . '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 	}
 	

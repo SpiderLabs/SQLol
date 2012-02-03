@@ -5,3 +5,13 @@ v0.2
 January 14, 2012
 Added "Challenge 0" to make an even simpler first step
 Changed php open tags to support PHP installations where short_tags is off
+
+v0.3
+Gave Challenge 3 a much more badass name with no loss of pun value
+
+v0.3.1
+Removed the functionality for submitting values via GET/POST/cookie, it was buggy
+Stopped doing stupid sqlol_vars stuff and just use $_REQUEST now
+Injecting via GET/POST/cookie should work regardless due to use of $_REQUEST
+Changed more <? to <?php
+Changed database config file to use default MySQL creds and location by default

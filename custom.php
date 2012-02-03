@@ -10,7 +10,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-include('includes/inject_cookie.php');
 ?>
 <html>
 <head>
@@ -29,8 +28,8 @@ include('includes/nav.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 		
-	$query = str_replace('*INJECT*', $sqlol_vars['inject_string'], $sqlol_vars['location']);
-	$displayquery = str_replace('*INJECT*', '<u>' . $sqlol_vars['inject_string'] . '</u>', $sqlol_vars['location']);
+	$query = str_replace('*INJECT*', $_REQUEST['inject_string'], $_REQUEST['location']);
+	$displayquery = str_replace('*INJECT*', '<u>' . $_REQUEST['inject_string'] . '</u>', $_REQUEST['location']);
 	
 	include('includes/database.inc.php');
 	

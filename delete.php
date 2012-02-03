@@ -11,7 +11,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-include('includes/inject_cookie.php');
 ?>
 <html>
 <head>
@@ -39,22 +38,22 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 	$display_table_name = $table_name = 'users';
 	$display_where_clause = $where_clause = 'WHERE isadmin = 0';
 
-	switch ($sqlol_vars['location']){
+	switch ($_REQUEST['location']){
 		case 'table_name':
-			$table_name = $sqlol_vars['inject_string'];
-			$display_table_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$table_name = $_REQUEST['inject_string'];
+			$display_table_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'where_string':
-			$where_clause = "WHERE username = '" . $sqlol_vars['inject_string'] . "'";
-			$display_where_clause = "WHERE username = '" . '<u>' . $sqlol_vars['inject_string'] . '</u>' . "'";
+			$where_clause = "WHERE username = '" . $_REQUEST['inject_string'] . "'";
+			$display_where_clause = "WHERE username = '" . '<u>' . $_REQUEST['inject_string'] . '</u>' . "'";
 			break;
 		case 'where_int':
-			$where_clause = 'WHERE isadmin = ' . $sqlol_vars['inject_string'];
-			$display_where_clause = 'WHERE isadmin = ' . '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$where_clause = 'WHERE isadmin = ' . $_REQUEST['inject_string'];
+			$display_where_clause = 'WHERE isadmin = ' . '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'column_name':
-			$where_clause = 'WHERE ' . $sqlol_vars['inject_string'] . ' = 1';
-			$display_where_clause = 'WHERE ' . '<u>' . $sqlol_vars['inject_string'] . '</u>' . ' = 1';
+			$where_clause = 'WHERE ' . $_REQUEST['inject_string'] . ' = 1';
+			$display_where_clause = 'WHERE ' . '<u>' . $_REQUEST['inject_string'] . '</u>' . ' = 1';
 	}
 	
 	$query = "DELETE FROM $table_name $where_clause";

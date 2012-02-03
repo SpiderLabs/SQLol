@@ -48,6 +48,9 @@ if (!$results){
 				$results->MoveNext();
 			}
 			break;
+		case 'bool':
+			if(!$results->EOF) print "Got results!";
+			break;
 	}
 }
 

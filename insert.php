@@ -10,7 +10,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-include('includes/inject_cookie.php');
 ?>
 <html>
 <head>
@@ -40,22 +39,22 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 	$display_string_value = $string_value = 'haxotron9000';
 	$display_int_value = $int_value = '0';
 
-	switch ($sqlol_vars['location']){ //Rewrite the appropriate variable for the injection location
+	switch ($_REQUEST['location']){ //Rewrite the appropriate variable for the injection location
 		case 'column_name':
-			$column_name = $sqlol_vars['inject_string'] . ', isadmin';
-			$display_column_name = '<u>' . $sqlol_vars['inject_string'] . '</u>' . ', isadmin';
+			$column_name = $_REQUEST['inject_string'] . ', isadmin';
+			$display_column_name = '<u>' . $_REQUEST['inject_string'] . '</u>' . ', isadmin';
 			break;
 		case 'table_name':
-			$table_name = $sqlol_vars['inject_string'];
-			$display_table_name = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$table_name = $_REQUEST['inject_string'];
+			$display_table_name = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'string_value':
-			$string_value = $sqlol_vars['inject_string'];
-			$display_string_value = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$string_value = $_REQUEST['inject_string'];
+			$display_string_value = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 		case 'int_value':
-			$int_value = $sqlol_vars['inject_string'];
-			$display_int_value = '<u>' . $sqlol_vars['inject_string'] . '</u>';
+			$int_value = $_REQUEST['inject_string'];
+			$display_int_value = '<u>' . $_REQUEST['inject_string'] . '</u>';
 			break;
 	}
 	
