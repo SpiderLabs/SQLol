@@ -18,15 +18,15 @@ $dsn = $dbtype.'://'.$hostspec.'/'.$database.$persist;
 $db_conn = NewADOConnection($dsn);
 
 print("\n<br>\n<br>");
-if(isset($sqlol_vars['show_query']) and $sqlol_vars['show_query']=='on') echo "Query (injection string is <u>underlined</u>): " . $displayquery . "\n<br>";
+if(isset($_REQUEST['show_query']) and $_REQUEST['show_query']=='on') echo "Query (injection string is <u>underlined</u>): " . $displayquery . "\n<br>";
 
 $db_conn->SetFetchMode(ADODB_FETCH_ASSOC);
 $results = $db_conn->Execute($query);
 
 if (!$results){
 	$error = $db_conn->ErrorMsg();
-	if(isset($sqlol_vars['error_level']) and isset($error)){
-		switch ($sqlol_vars['error_level']){
+	if(isset($_REQUEST['error_level']) and isset($error)){
+		switch ($_REQUEST['error_level']){
 			case 'errors':
 				echo "An error occurred." . "\n<br>";
 				break;
@@ -36,7 +36,7 @@ if (!$results){
 		}
 	}	
 } else {
-	switch($sqlol_vars['query_results']){
+	switch($_REQUEST['query_results']){
 		case 'one_row':
 			print_r($results->fields);
 			print("\n<br>");
