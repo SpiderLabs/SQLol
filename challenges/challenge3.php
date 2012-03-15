@@ -22,7 +22,7 @@ You should have received a copy of the GNU General Public License along with thi
 	<hr width="60%">
 	<hr width="40%">
 	
-You don't always have the luxury of retrieving all rows of output from a query when performing an SQL injection attack. Sometimes, you only get one row. This challenge is similar to challenge 1, "SQL Injection 101", but only provides one row of output. To make things more challenging, this challenge configuration does not show you the query and submits the injection via POST.<br>
+You don't always have the luxury of retrieving all rows of output from a query when performing an SQL injection attack. Sometimes, you only get one row. This challenge is similar to challenge 1, "SQL Injection 101", but only provides one row of output. To make things more challenging, this challenge configuration does not show you the query.<br>
 <br>
 Your objective is to find the table of social security numbers present in the database and extract its information.
 
@@ -35,10 +35,10 @@ Sanitization - None
 Output - One row, verbose error messages, query not shown
 </pre>
 
-<form action="../select.php?method=post" method="post" name="challenge_form">
+<form action="../select.php" method="post" name="challenge_form">
 	<input type="hidden" name="sanitize_quotes" value="none"/>
 	<input type="hidden" name="spaces_remove" value="off"/>
-	<input type="hidden" name="keyword_blacklist" value="none"/>
+	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="one_row"/>
 	<input type="hidden" name="error_level" value="verbose"/>
 	<input type="hidden" name="show_query" value="off"/>
@@ -47,13 +47,5 @@ Output - One row, verbose error messages, query not shown
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
 <br>
-<pre>
-This challenge has known solutions on the following databases (others may have solutions):
-MySQL
-SQL Server
-Oracle
-PostgreSQL
-Sybase
-</pre>
 </body>
 </html>

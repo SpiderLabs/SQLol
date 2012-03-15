@@ -10,6 +10,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+$blacklist_low = 'select,from,1=1,--,union,#';
+$blacklist_medium = $blacklist_low . '@@,xp_cmdshell,UTL_HTTP';
+$blacklist_high = $blacklist_medium . '/*,*/,;';
+
 ?>
 <center>
 | <a href="insert.php">INSERT</a> || <a href="update.php">UPDATE</a> || <a href="delete.php">DELETE</a> || <a href="select.php">SELECT</a> || <a href="custom.php">Custom</a> || <a href="challenges.htm">Challenges</a> |<br>
@@ -19,9 +24,9 @@ You should have received a copy of the GNU General Public License along with thi
 <hr width="60%">
 <hr width="40%">
 <br>
-<form action="<?php echo basename($_SERVER['SCRIPT_FILENAME']) ?>" method="get">
+<form name="action="<?php echo basename($_SERVER['SCRIPT_FILENAME']) ?>" method="get">
 <table>
-<tr><td>Injection String:</td><td><input type="text" name="inject_string"></td></tr>
+<tr><td>Injection String:</td><td><input type="textarea" name="inject_string"></td></tr>
 <tr><td><b>Input Sanitization:</b></td></tr>
 <tr><td>Single Quotes:</td><td><select name="sanitize_quotes">
 		<option value="none">No sanitization</option>
@@ -30,17 +35,18 @@ You should have received a copy of the GNU General Public License along with thi
 		<option value="quotes_remove">Single quotes removed</option>
 	</select></td></tr>
 	<tr><td>Remove Spaces:</td><td><input type="checkbox" name="spaces_remove" value="on"></td></tr>
-	<tr><td>Blacklist Keywords:</td><td><select name="keyword_blacklist">
+	<tr><td>Blacklist Level:</td><td><select name="blacklist_level">
 		<option value="none">No blacklisting</option>
 		<option value="low">Low</option>
 		<option value="medium">Medium</option>
 		<option value="high">High</option>
 	</select></td></tr>
+	<tr><td>Blacklist Keywords (comma separated):</td><td><textarea name="blacklist_keywords"></textarea></td></tr>
 <tr><td><b>Output Level:</b></td></tr>
 	<tr><td>Output Query Results:</td><td><select name="query_results">
 		<option value="all_rows">All rows</option>
 		<option value="one_row">One row</option>
-		<option value="boolean">Boolean (Zero/Non-zero result set)</option>
+		<option value="bool">Boolean (Zero/Non-zero result set)</option>
 		<option value="none">No results</option>
 	</select></td></tr>
 	<tr><td>Error Verbosity:</td><td><select name="error_level">
@@ -50,6 +56,8 @@ You should have received a copy of the GNU General Public License along with thi
 	</select></td></tr>
 	<tr><td>Show Query:</td><td><input type="checkbox" name="show_query" value="on"></td></tr>
 <?php
+$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
+
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
 	switch($_REQUEST['sanitize_quotes']){ //Apply the requested level of quote sanitization
@@ -69,53 +77,39 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 	//Remove spaces if requested
 	if(isset($_REQUEST['spaces_remove']) and $_REQUEST['spaces_remove'] == 'on') $_REQUEST['inject_string'] = str_replace(' ', '', $_REQUEST['inject_string']);
 	
-	//Define blacklists
-	$blacklist_low = array(
-		'select',
-		'from',
-		'1=1',
-		'--',
-		'union',
-		'#'
-	);
-	$blacklist_medium = array_merge($blacklist_low, array(
-		'@@',
-		'xp_cmdshell',
-		'UTL_HTTP'
-	));
-	$blacklist_high = array_merge($blacklist_medium, array(
-		'/*',
-		'*/',
-		';'
-	));
-	
-	switch($_REQUEST['keyword_blacklist']){
-		//We process blacklists differently at each level. At the lowest, each keyword is removed case-sensitively.
-		//At medium blacklisting, more keywords are added and checks are done case-insensitively.
-		//At the highest level, more keywords are added and checks are done case-insensitively and repeatedly.
-		
-		case 'low':
-			foreach($blacklist_low as $keyword){
-				$_REQUEST['inject_string'] = str_replace($keyword, '', $_REQUEST['inject_string']);
-			}
-			break;
-		case 'medium':
-			foreach($blacklist_medium as $keyword){
-				$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']));
-			}
-			break;
-		case 'high':
-			do{
-				$keyword_found = 0;
-				foreach($blacklist_high as $keyword){
-					$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']), $count);
-					$keyword_found += $count;
-				}	
-			}while ($keyword_found);
-			break;
-			
+	//Parse blacklist
+	if(isset($_REQUEST['blacklist_keywords'])){
+		$blacklist = explode(',' , $_REQUEST['blacklist_keywords']);
 	}
 	
+	if(isset($_REQUEST['blacklist_level'])){
+		switch($_REQUEST['blacklist_level']){
+			//We process blacklists differently at each level. At the lowest, each keyword is removed case-sensitively.
+			//At medium blacklisting, checks are done case-insensitively.
+			//At the highest level, checks are done case-insensitively and repeatedly.
+		
+			case 'low':
+				foreach($blacklist as $keyword){
+					$_REQUEST['inject_string'] = str_replace($keyword, '', $_REQUEST['inject_string']);
+				}
+				break;
+			case 'medium':
+				foreach($blacklist as $keyword){
+					$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']));
+				}
+				break;
+			case 'high':
+				do{
+					$keyword_found = 0;
+					foreach($blacklist as $keyword){
+						$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']), $count);
+						$keyword_found += $count;
+					}	
+				}while ($keyword_found);
+				break;
+			
+		}
+	}
 }
 
 ?>

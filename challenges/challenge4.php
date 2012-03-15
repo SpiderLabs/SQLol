@@ -35,10 +35,10 @@ Sanitization - None
 Output - No results, verbose error messages, query not shown
 </pre>
 
-<form action="../select.php?method=post" method="post" name="challenge_form">
+<form action="../select.php" method="post" name="challenge_form">
 	<input type="hidden" name="sanitize_quotes" value="none"/>
 	<input type="hidden" name="spaces_remove" value="off"/>
-	<input type="hidden" name="keyword_blacklist" value="none"/>
+	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="none"/>
 	<input type="hidden" name="error_level" value="verbose"/>
 	<input type="hidden" name="show_query" value="off"/>
@@ -47,11 +47,5 @@ Output - No results, verbose error messages, query not shown
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
 <br>
-<pre>
-This challenge has known solutions on the following databases (others may have solutions):
-MySQL
-SQL Server
-Oracle
-</pre>
 </body>
 </html>

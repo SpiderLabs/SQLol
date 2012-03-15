@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 SQLol - A configurable SQL injection testbed
 Daniel "unicornFurnace" Crowley
@@ -13,39 +13,38 @@ You should have received a copy of the GNU General Public License along with thi
 ?>
 <html>
 <head>
-	<title>SQLol - Challenge 8 - Black Comedy</title>
+	<title>SQLol - Challenge 12 - LIKE OMG</title>
 </head>
 <body>
-	<center><h1>SQLol - Challenge 8 - Black Comedy</h1></center><br>
+	<center><h1>SQLol - Challenge 12 - LIKE OMG</h1></center><br>
 
 	<hr width="40%">
 	<hr width="60%">
 	<hr width="40%">
 	
-You must perform a very basic SQL injection attack, but a primitive blacklisting filter is in place.<br>
+The LIKE keyword operates similarly to the equality operator "=" in SQL databases. The difference is that wildcards are allowed. In this challenge, a developer has used the "LIKE" keyword instead of the equality operator.<br>
 <br>
-Your objective is to find the table of social security numbers present in the database and extract its information.
+Your objective is to retrieve all usernames from the database.
 
 <pre>
 PARAMETERS:
 Query Type - SELECT query
 Injection Type - String value in WHERE clause
 Method - POST
-Sanitization - Blacklist filter on "low"
-Output - All results, verbose error messages, query shown
+Sanitization - Single quotes removed
+Output - Boolean, query not shown
 </pre>
 
-<form action="../select.php" method="post" name="challenge_form">
-	<input type="hidden" name="sanitize_quotes" value="none"/>
+<form action="../custom.php" method="post" name="challenge_form">
+	<input type="hidden" name="sanitize_quotes" value="quotes_remove"/>
 	<input type="hidden" name="spaces_remove" value="off"/>
-	<input type="hidden" name="blacklist_level" value="low"/>
-	<input type="hidden" name="blacklist_keywords" value="union,select,where,and,or,--,#"/>
-	<input type="hidden" name="query_results" value="all_rows"/>
-	<input type="hidden" name="error_level" value="verbose"/>
-	<input type="hidden" name="show_query" value="on"/>
-	<input type="hidden" name="location" value="where_string"/>
+	<input type="hidden" name="query_results" value="bool"/>
+	<input type="hidden" name="error_level" value="none"/>
+	<input type="hidden" name="show_query" value="off"/>
+	<input type="hidden" name="location" value="select username from users where username LIKE '*INJECT*'"/>
 	Injection String: <input type="text" name="inject_string"/><br>
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
+<br>
 </body>
 </html>

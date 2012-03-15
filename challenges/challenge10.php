@@ -13,39 +13,39 @@ You should have received a copy of the GNU General Public License along with thi
 ?>
 <html>
 <head>
-	<title>SQLol - Challenge 8 - Black Comedy</title>
+	<title>SQLol - Challenge 10 - No WHERE</title>
 </head>
 <body>
-	<center><h1>SQLol - Challenge 8 - Black Comedy</h1></center><br>
+	<center><h1>SQLol - Challenge 10 - No WHERE</h1></center><br>
 
 	<hr width="40%">
 	<hr width="60%">
 	<hr width="40%">
 	
-You must perform a very basic SQL injection attack, but a primitive blacklisting filter is in place.<br>
+In this challenge, you are working with an ordinary SELECT query. However, this is not a standard injection into the WHERE clause. In this challenge, you are injecting into the column name in the query.<br>
 <br>
-Your objective is to find the table of social security numbers present in the database and extract its information.
+Your objective is to obtain the social security numbers from the database.
 
 <pre>
 PARAMETERS:
 Query Type - SELECT query
-Injection Type - String value in WHERE clause
-Method - POST
-Sanitization - Blacklist filter on "low"
-Output - All results, verbose error messages, query shown
+Injection Type - Column name
+Method - GET
+Sanitization - None
+Output - No error messages, query shown
 </pre>
 
-<form action="../select.php" method="post" name="challenge_form">
+<form action="../select.php" method="get" name="challenge_form">
 	<input type="hidden" name="sanitize_quotes" value="none"/>
 	<input type="hidden" name="spaces_remove" value="off"/>
-	<input type="hidden" name="blacklist_level" value="low"/>
-	<input type="hidden" name="blacklist_keywords" value="union,select,where,and,or,--,#"/>
-	<input type="hidden" name="query_results" value="all_rows"/>
-	<input type="hidden" name="error_level" value="verbose"/>
+	<input type="hidden" name="blacklist_level" value="none"/>
+	<input type="hidden" name="query_results" value="all"/>
+	<input type="hidden" name="error_level" value="none"/>
 	<input type="hidden" name="show_query" value="on"/>
-	<input type="hidden" name="location" value="where_string"/>
+	<input type="hidden" name="location" value="column_name"/>
 	Injection String: <input type="text" name="inject_string"/><br>
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
+<br>
 </body>
 </html>

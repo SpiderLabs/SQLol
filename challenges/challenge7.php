@@ -13,47 +13,40 @@ You should have received a copy of the GNU General Public License along with thi
 ?>
 <html>
 <head>
-	<title>SQLol - Challenge 7 - Blind Luck</title>
+	<title>SQLol - Challenge 7 - Walking on Thin Ice</title>
 </head>
 <body>
-	<center><h1>SQLol - Challenge 7 - Blind Luck</h1></center><br>
+	<center><h1>SQLol - Challenge 7 - Walking on Thin Ice</h1></center><br>
 
 	<hr width="40%">
 	<hr width="60%">
 	<hr width="40%">
 	
-You must perform a basic Blind SQL injection attack. No output is available to you, save for generic error messages.<br>
+In this challenge, no output from the query is shown, but verbose errors are shown.<br>
 <br>
-Your objective is to find the table of social security numbers present in the database and extract its information.
+Your objective is to find the table of social security numbers present in the database and extract its information WITHOUT deleting anything from the database.<br>
+(If you do happen to destroy the database, you can always use the <a href="../resetbutton.php">SQLol reset button</a> to bring it back to its original state.)
 
 <pre>
 PARAMETERS:
-Query Type - SELECT query
+Query Type - DELETE query
 Injection Type - String value in WHERE clause
 Method - POST
 Sanitization - None
-Output - No results, generic error messages
+Output - No results, verbose error messages, query not shown
 </pre>
 
-<form action="../select.php?method=post" method="post" name="challenge_form">
+<form action="../delete.php" method="post" name="challenge_form">
 	<input type="hidden" name="sanitize_quotes" value="none"/>
 	<input type="hidden" name="spaces_remove" value="off"/>
-	<input type="hidden" name="keyword_blacklist" value="none"/>
+	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="none"/>
-	<input type="hidden" name="error_level" value="errors"/>
-	<input type="hidden" name="show_query" value="on"/>
+	<input type="hidden" name="error_level" value="generic"/>
+	<input type="hidden" name="show_query" value="off"/>
 	<input type="hidden" name="location" value="where_string"/>
 	Injection String: <input type="text" name="inject_string"/><br>
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
 <br>
-<pre>
-This challenge has known solutions on the following databases (others may have solutions):
-MySQL
-SQL Server
-Oracle
-PostgreSQL
-Sybase
-</pre>
 </body>
 </html>
