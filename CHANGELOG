@@ -15,3 +15,10 @@ Stopped doing stupid sqlol_vars stuff and just use $_REQUEST now
 Injecting via GET/POST/cookie should work regardless due to use of $_REQUEST
 Changed more <? to <?php
 Changed database config file to use default MySQL creds and location by default
+
+v0.3.2
+Added more challenges
+-Try Challenge 13, it's a zinger!
+Added tutorials for some challenges
+Added custom blacklist filtering
+Removed notes in challenge pages about which database systems have known solutions, those will go in tutorials over time
