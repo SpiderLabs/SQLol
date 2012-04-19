@@ -41,7 +41,7 @@ Output - No results, verbose error messages, query not shown
 	<input type="hidden" name="spaces_remove" value="off"/>
 	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="none"/>
-	<input type="hidden" name="error_level" value="generic"/>
+	<input type="hidden" name="error_level" value="errors"/>
 	<input type="hidden" name="show_query" value="off"/>
 	<input type="hidden" name="location" value="where_string"/>
 	Injection String: <input type="text" name="inject_string"/><br>
