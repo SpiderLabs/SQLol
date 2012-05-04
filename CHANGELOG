@@ -22,3 +22,10 @@ Added more challenges
 Added tutorials for some challenges
 Added custom blacklist filtering
 Removed notes in challenge pages about which database systems have known solutions, those will go in tutorials over time
+
+v0.4
+Restructured SQLol to make it more modular
+Changed UI to be more friendly
+Added blacklisting options
+Added functionality to remember options from last inject
+
