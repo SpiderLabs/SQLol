@@ -19,15 +19,18 @@ You should have received a copy of the GNU General Public License along with thi
 <center><h1>SQLol - Custom query</h1></center><br>
 <?php
 include('includes/nav.inc.php');
+include('includes/options.inc.php');
 ?>
 
-<tr><td>Original Query (write *INJECT* in the query where you want to inject):</td><td><input type="textbox" name="location"></td></tr>
+<tr><td>Original Query (write *INJECT* in the query where you want to inject):</td><td><textarea name="location"><?php if(isset($_REQUEST["location"])) echo $_REQUEST["location"]; ?></textarea></td></tr>
 	</table>
 <input type="submit" name="submit" value="Inject!">
 
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 		
+	include('includes/sanitize.inc.php');
+	
 	$query = str_replace('*INJECT*', $_REQUEST['inject_string'], $_REQUEST['location']);
 	$displayquery = str_replace('*INJECT*', '<u>' . $_REQUEST['inject_string'] . '</u>', $_REQUEST['location']);
 	

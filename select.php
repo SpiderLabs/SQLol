@@ -19,18 +19,19 @@ You should have received a copy of the GNU General Public License along with thi
 <center><h1>SQLol - SELECT query</h1></center><br>
 <?php
 include('includes/nav.inc.php');
+include('includes/options.inc.php');
 ?>
 
 <tr><td>Injection Location:</td><td>
 	<select name="location">
 		<option value="where_string">String in WHERE clause</option>
-		<option value="where_int">Integer in WHERE clause</option>
-		<option value="entire_query">Entire Query</option>
-		<option value="column_name">Column Name</option>
-		<option value="table_name">Table Name</option>
-		<option value="order_by">ORDER BY clause</option>
-		<option value="group_by">GROUP BY clause</option>
-		<option value="having">HAVING clause</option>
+		<option value="where_int" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="where_int") echo "selected"; ?>>Integer in WHERE clause</option>
+		<option value="entire_query" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="entire_query") echo "selected"; ?>>Entire Query</option>
+		<option value="column_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="column_name") echo "selected"; ?>>Column Name</option>
+		<option value="table_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="table_name") echo "selected"; ?>>Table Name</option>
+		<option value="order_by" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="order_by") echo "selected"; ?>>ORDER BY clause</option>
+		<option value="group_by" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="group_by") echo "selected"; ?>>GROUP BY clause</option>
+		<option value="having" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="having") echo "selected"; ?>>HAVING clause</option>
 	</select></td></tr>
 	</table>
 <input type="submit" name="submit" value="Inject!">
@@ -38,6 +39,8 @@ include('includes/nav.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
+	include('includes/sanitize.inc.php');
+
 	if($_REQUEST['location'] == 'entire_query'){//If we're injecting an entire query (SQLi as a feature, seems unrealistic but I've seen it more than once) then let's not waste cycles building the query.
 		
 		$query = $_REQUEST['inject_string'];

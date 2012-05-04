@@ -36,8 +36,6 @@ Output - No error messages, query shown
 </pre>
 
 <form action="../select.php" method="get" name="challenge_form">
-	<input type="hidden" name="sanitize_quotes" value="none"/>
-	<input type="hidden" name="spaces_remove" value="off"/>
 	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="all"/>
 	<input type="hidden" name="error_level" value="none"/>

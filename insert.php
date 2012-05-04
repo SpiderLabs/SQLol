@@ -19,14 +19,15 @@ You should have received a copy of the GNU General Public License along with thi
 <center><h1>SQLol - INSERT query</h1></center><br>
 <?php
 include('includes/nav.inc.php');
+include('includes/options.inc.php');
 ?>
 
 <tr><td>Injection Location:</td><td>
 	<select name="location">
 		<option value="string_value">Value (string)</option>
-		<option value="int_value">Value (int)</option>
-		<option value="column_name">Column Name</option>
-		<option value="table_name">Table Name</option>
+		<option value="int_value" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="int_value") echo "selected"; ?>>Value (int)</option>
+		<option value="column_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="column_name") echo "selected"; ?>>Column Name</option>
+		<option value="table_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="table_name") echo "selected"; ?>>Table Name</option>
 	</select></td></tr></table>
 	
 <input type="submit" name="submit" value="Inject!">
@@ -34,6 +35,8 @@ include('includes/nav.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!
 				
+	include('includes/sanitize.inc.php');	
+		
 	$display_column_name = $column_name = 'username, isadmin';
 	$display_table_name = $table_name = 'users';
 	$display_string_value = $string_value = 'haxotron9000';

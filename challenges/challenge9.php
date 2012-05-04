@@ -36,8 +36,6 @@ Output - Generic error messages, query shown
 </pre>
 
 <form action="../update.php" method="post" name="challenge_form">
-	<input type="hidden" name="sanitize_quotes" value="none"/>
-	<input type="hidden" name="spaces_remove" value="off"/>
 	<input type="hidden" name="blacklist_level" value="none"/>
 	<input type="hidden" name="query_results" value="none"/>
 	<input type="hidden" name="error_level" value="errors"/>

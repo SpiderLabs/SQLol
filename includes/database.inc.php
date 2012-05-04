@@ -17,6 +17,8 @@ include_once('adodb/adodb.inc.php');
 $dsn = $dbtype.'://'.$hostspec.'/'.$database.$persist;
 $db_conn = NewADOConnection($dsn);
 
+$_REQUEST = array_merge($_GET, $_POST, $_COOKIE);
+
 print("\n<br>\n<br>");
 if(isset($_REQUEST['show_query']) and $_REQUEST['show_query']=='on') echo "Query (injection string is <u>underlined</u>): " . $displayquery . "\n<br>";
 

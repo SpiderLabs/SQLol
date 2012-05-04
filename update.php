@@ -19,21 +19,24 @@ You should have received a copy of the GNU General Public License along with thi
 <center><h1>SQLol - UPDATE query</h1></center><br>
 <?php
 include('includes/nav.inc.php');
+include('includes/options.inc.php');
 ?>
 
 <tr><td>Injection Location:</td><td>
 	<select name="location">
 		<option value="where_string">String in WHERE clause</option>
-		<option value="where_int">Integer in WHERE Clause</option>
-		<option value="column_name">Column Name</option>
-		<option value="table_name">Table Name</option>
-		<option value="value">Value to write</option>
+		<option value="where_int" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="where_int") echo "selected"; ?>>Integer in WHERE Clause</option>
+		<option value="column_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="column_name") echo "selected"; ?>>Column Name</option>
+		<option value="table_name" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="table_name") echo "selected"; ?>>Table Name</option>
+		<option value="value" <?php if(isset($_REQUEST["location"]) and $_REQUEST["location"]=="value") echo "selected"; ?>>Value to write</option>
 	</select></td></tr>
 	</table>
 <input type="submit" name="submit" value="Inject!">
 
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!
+	
+	include('includes/sanitize.inc.php');
 	
 	$display_column_name = $column_name = 'username';
 	$display_table_name = $table_name = 'users';
