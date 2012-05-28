@@ -34,7 +34,8 @@ include('includes/options.inc.php');
 
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!
-				
+		
+	include('includes/environ.inc.php');		
 	include('includes/sanitize.inc.php');	
 		
 	$display_column_name = $column_name = 'username, isadmin';

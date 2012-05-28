@@ -39,6 +39,7 @@ include('includes/options.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
 	
+	include('includes/environ.inc.php');
 	include('includes/sanitize.inc.php');
 
 	if($_REQUEST['location'] == 'entire_query'){//If we're injecting an entire query (SQLi as a feature, seems unrealistic but I've seen it more than once) then let's not waste cycles building the query.

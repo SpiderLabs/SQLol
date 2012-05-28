@@ -29,3 +29,7 @@ Changed UI to be more friendly
 Added blacklisting options
 Added functionality to remember options from last inject
 
+v0.4.1
+Added option to cause script to fail 1 in 10 times
+Added option to cause random time delays
+

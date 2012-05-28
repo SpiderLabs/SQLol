@@ -26,7 +26,7 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 			case 'reject_high':
 				foreach($blacklist as $keyword){
 					if(strstr(strtolower($_REQUEST['inject_string']), strtolower($keyword))!='') {
-						die('Blacklist was triggered!');
+						die('\nBlacklist was triggered!');
 					}
 				}
 				break;

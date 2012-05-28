@@ -36,6 +36,7 @@ include('includes/options.inc.php');
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!
 	
+	include('includes/environ.inc.php');
 	include('includes/sanitize.inc.php');
 
 	$display_table_name = $table_name = 'users';

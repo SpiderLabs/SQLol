@@ -22,13 +22,14 @@ include('includes/nav.inc.php');
 include('includes/options.inc.php');
 ?>
 
-<tr><td>Original Query (write *INJECT* in the query where you want to inject):</td><td><textarea name="location"><?php if(isset($_REQUEST["location"])) echo $_REQUEST["location"]; ?></textarea></td></tr>
+<tr><td>Original Query (*INJECT* specifies injection point):</td><td><textarea name="location"><?php if(isset($_REQUEST["location"])) echo htmlentities($_REQUEST["location"]); ?></textarea></td></tr>
 	</table>
 <input type="submit" name="submit" value="Inject!">
 
 <?php
 if(isset($_REQUEST['submit'])){ //Injection time!	
-		
+	
+	include('includes/environ.inc.php');
 	include('includes/sanitize.inc.php');
 	
 	$query = str_replace('*INJECT*', $_REQUEST['inject_string'], $_REQUEST['location']);

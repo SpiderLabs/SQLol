@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License along with thi
 <form method="get">
 <table>
 <tr><td>Injection String:</td></tr>
-<tr><td><textarea name="inject_string"><?php if(isset($_REQUEST["inject_string"])) echo $_REQUEST["inject_string"]; ?></textarea></td></tr>
+<tr><td><textarea name="inject_string"><?php if(isset($_REQUEST["inject_string"])) echo htmlentities($_REQUEST["inject_string"]); ?></textarea></td></tr>
 <tr><td><b>Input Sanitization:</b></td></tr>
 <tr><td>Double-up Single Quotes:</td><td><input type="checkbox" name="quotes_double" <?php if(isset($_REQUEST["quotes_double"])) echo "checked"; ?> ></td></tr>
 	<tr><td>Blacklist Level:</td><td><select name="blacklist_level">
@@ -28,6 +28,9 @@ You should have received a copy of the GNU General Public License along with thi
 		<option value="high" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="high") echo "selected"; ?>>Remove (High)</option>
 	</select></td></tr>
 	<tr><td>Blacklist Keywords (comma separated):</td><td><textarea name="blacklist_keywords"><?php if(isset($_REQUEST["blacklist_keywords"])) echo $_REQUEST["blacklist_keywords"]; ?></textarea></td></tr>
+<tr><td><b>Environmental Settings:<b></td></tr>
+	<tr><td>Random Failure?</td><td><input type="checkbox" name="random_failure"<?php echo isset($_REQUEST['random_failure']) ? ' checked' : '' ?>>
+	<tr><td>Random Time Delay?</td><td><input type="checkbox" name="random_delay"<?php echo isset($_REQUEST['random_delay']) ? ' checked' : '' ?>>
 <tr><td><b>Output Level:</b></td></tr>
 	<tr><td>Output Query Results:</td><td><select name="query_results">
 		<option value="all_rows">All rows</option>
