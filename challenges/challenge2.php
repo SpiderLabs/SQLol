@@ -36,8 +36,9 @@ Output - All results, verbose error messages, query shown
 </pre>
 
 <form action="../select.php" method="get" name="challenge_form">
-	<input type="hidden" name="blacklist_level" value="high"/>
-	<input type="hidden" name="blacklist_keywords" value="'">
+	<input type="hidden" name="sanitization_level" value="high"/>
+	<input type="hidden" name="sanitization_params" value="'">
+	<input type="hidden" name="sanitization_type" value="keyword">
 	<input type="hidden" name="query_results" value="all_rows"/>
 	<input type="hidden" name="error_level" value="verbose"/>
 	<input type="hidden" name="show_query" value="on"/>

@@ -17,17 +17,22 @@ You should have received a copy of the GNU General Public License along with thi
 <tr><td>Injection String:</td></tr>
 <tr><td><textarea name="inject_string"><?php if(isset($_REQUEST["inject_string"])) echo htmlentities($_REQUEST["inject_string"]); ?></textarea></td></tr>
 <tr><td><b>Input Sanitization:</b></td></tr>
-<tr><td>Double-up Single Quotes:</td><td><input type="checkbox" name="quotes_double" <?php if(isset($_REQUEST["quotes_double"])) echo "checked"; ?> ></td></tr>
-	<tr><td>Blacklist Level:</td><td><select name="blacklist_level">
-		<option value="none">No blacklisting</option>
-		<option value="reject_low" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="reject_low") echo "selected"; ?>>Reject (Low)</option>
-		<option value="reject_high" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="reject_high") echo "selected"; ?>>Reject (High)</option>
-		<option value="escape" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="escape") echo "selected"; ?>>Escape</option>
-		<option value="low" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="low") echo "selected"; ?>>Remove (Low)</option>
-		<option value="medium" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="medium") echo "selected"; ?>>Remove (Medium)</option>
-		<option value="high" <?php if(isset($_REQUEST["blacklist_level"]) and $_REQUEST["blacklist_level"]=="high") echo "selected"; ?>>Remove (High)</option>
+	<tr><td>Double-up Single Quotes:</td><td><input type="checkbox" name="quotes_double" <?php if(isset($_REQUEST["quotes_double"])) echo "checked"; ?> ></td></tr>
+	<tr><td>Sanitization Level:</td><td><select name="sanitization_level">
+		<option value="none">No sanitization</option>
+		<option value="whitelist" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="whitelist") echo "selected"; ?>>Accept Only Whitelisted Items</option>
+		<option value="whitelist" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="whitelist") echo "selected"; ?>>Accept Only Whitelisted Items</option>
+		<option value="reject_low" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="reject_low") echo "selected"; ?>>Case-Sensitively Reject Blacklisted Items</option>
+		<option value="reject_high" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="reject_high") echo "selected"; ?>>Case-Insensitively Reject Blacklisted Items</option>
+		<option value="escape" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="escape") echo "selected"; ?>>Backslash-Escape Blacklisted Items</option>
+		<option value="low" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="low") echo "selected"; ?>>Case-Sensitively Remove Blacklisted Items</option>
+		<option value="medium" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="medium") echo "selected"; ?>>Case-Insensitively Remove Blacklisted Items</option>
+		<option value="high" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="high") echo "selected"; ?>>Case-Insensitively and Repetitively Remove Blacklisted Items</option>
 	</select></td></tr>
-	<tr><td>Blacklist Keywords (comma separated):</td><td><textarea name="blacklist_keywords"><?php if(isset($_REQUEST["blacklist_keywords"])) echo $_REQUEST["blacklist_keywords"]; ?></textarea></td></tr>
+	<tr><td>Keywords <input type="radio" value="keyword" name="sanitization_type" <?php if(!isset($_REQUEST['sanitization_type']) or $_REQUEST["sanitization_type"]=="keyword") echo "checked"; ?>></td>
+		<td>Regexes <input type="radio" value="regex" name="sanitization_type" <?php if(isset($_REQUEST["sanitization_type"]) and $_REQUEST["sanitization_type"]=="regex") echo "checked"; ?>></td></tr>
+	<tr><td>Enter comma-separated keywords or regexes<br>to whitelist or blacklist below.</td></tr>
+	<tr><td>Sanitization Parameters:</td><td><textarea name="sanitization_params"><?php if(isset($_REQUEST["sanitization_params"])) echo $_REQUEST["sanitization_params"]; ?></textarea></td></tr>
 <tr><td><b>Environmental Settings:<b></td></tr>
 	<tr><td>Random Failure?</td><td><input type="checkbox" name="random_failure"<?php echo isset($_REQUEST['random_failure']) ? ' checked' : '' ?>>
 	<tr><td>Random Time Delay?</td><td><input type="checkbox" name="random_delay"<?php echo isset($_REQUEST['random_delay']) ? ' checked' : '' ?>>

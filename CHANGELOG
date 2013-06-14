@@ -33,3 +33,9 @@ v0.4.1
 Added option to cause script to fail 1 in 10 times
 Added option to cause random time delays
 
+v0.4.2
+Added whitelist sanitization
+Added regex based sanitization
+Clarified sanitization options
+Added challenge 14
+

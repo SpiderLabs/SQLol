@@ -13,33 +13,34 @@ You should have received a copy of the GNU General Public License along with thi
 ?>
 <html>
 <head>
-	<title>SQLol - Challenge 13 - LIKE OMG</title>
+	<title>SQLol - Challenge 14 - Now you have two problems</title>
 </head>
 <body>
-	<center><h1>SQLol - Challenge 13 - LIKE OMG</h1></center><br>
+	<center><h1>SQLol - Challenge 14 - Now you have two problems</h1></center><br>
 
 	<hr width="40%">
 	<hr width="60%">
 	<hr width="40%">
 	
-The LIKE keyword operates similarly to the equality operator "=" in SQL databases. The difference is that wildcards are allowed. In this challenge, a developer has used the "LIKE" keyword instead of the equality operator.<br>
+It is often said that if you have a problem you try to solve with regular expressions, you now have two problems. In this challenge, you must evade a whitelist filter implemented with regular expressions.
 <br>
-Your objective is to retrieve all usernames from the database.
+Your objective is to retrieve the social security numbers from the database.
 
 <pre>
 PARAMETERS:
 Query Type - SELECT query
 Injection Type - String value in WHERE clause
 Method - POST
-Sanitization - Single quotes removed
-Output - Boolean, query not shown
+Sanitization - Whitelist, regular expressions
 </pre>
 
-<form action="../custom.php" method="post" name="challenge_form">
-	<input type="hidden" name="query_results" value="bool"/>
+<form action="../select.php" method="post" name="challenge_form">
+	<input type="hidden" name="sanitization_level" value="whitelist">
+	<input type="hidden" name="sanitization_params" value="/^[a-zA-Z0-9]*$/m">
+	<input type="hidden" name="sanitization_type" value="regex">
 	<input type="hidden" name="error_level" value="none"/>
 	<input type="hidden" name="show_query" value="off"/>
-	<input type="hidden" name="location" value="select username from users where username LIKE '*INJECT*'"/>
+	<input type="hidden" name="location" value="where_string"/>
 	Injection String: <input type="text" name="inject_string"/><br>
 	<input type="submit" name="submit" value="Inject!"/>
 </form>
