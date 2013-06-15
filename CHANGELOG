@@ -39,3 +39,7 @@ Added regex based sanitization
 Clarified sanitization options
 Added challenge 14
 
+v0.4.2.1
+Fixed bug in medium and high blacklist options
+De-duplicated whitelist option
+
