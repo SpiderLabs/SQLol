@@ -21,7 +21,6 @@ You should have received a copy of the GNU General Public License along with thi
 	<tr><td>Sanitization Level:</td><td><select name="sanitization_level">
 		<option value="none">No sanitization</option>
 		<option value="whitelist" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="whitelist") echo "selected"; ?>>Accept Only Whitelisted Items</option>
-		<option value="whitelist" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="whitelist") echo "selected"; ?>>Accept Only Whitelisted Items</option>
 		<option value="reject_low" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="reject_low") echo "selected"; ?>>Case-Sensitively Reject Blacklisted Items</option>
 		<option value="reject_high" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="reject_high") echo "selected"; ?>>Case-Insensitively Reject Blacklisted Items</option>
 		<option value="escape" <?php if(isset($_REQUEST["sanitization_level"]) and $_REQUEST["sanitization_level"]=="escape") echo "selected"; ?>>Backslash-Escape Blacklisted Items</option>
@@ -33,7 +32,7 @@ You should have received a copy of the GNU General Public License along with thi
 		<td>Regexes <input type="radio" value="regex" name="sanitization_type" <?php if(isset($_REQUEST["sanitization_type"]) and $_REQUEST["sanitization_type"]=="regex") echo "checked"; ?>></td></tr>
 	<tr><td>Enter comma-separated keywords or regexes<br>to whitelist or blacklist below.</td></tr>
 	<tr><td>Sanitization Parameters:</td><td><textarea name="sanitization_params"><?php if(isset($_REQUEST["sanitization_params"])) echo $_REQUEST["sanitization_params"]; ?></textarea></td></tr>
-<tr><td><b>Environmental Settings:<b></td></tr>
+<tr><td><b>Environmental Settings:</b></td></tr>
 	<tr><td>Random Failure?</td><td><input type="checkbox" name="random_failure"<?php echo isset($_REQUEST['random_failure']) ? ' checked' : '' ?>>
 	<tr><td>Random Time Delay?</td><td><input type="checkbox" name="random_delay"<?php echo isset($_REQUEST['random_delay']) ? ' checked' : '' ?>>
 <tr><td><b>Output Level:</b></td></tr>

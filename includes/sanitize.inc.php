@@ -50,14 +50,14 @@ if(isset($_REQUEST['submit'])){ //Injection time!
 				break;
 			case 'medium':
 				foreach($params as $keyword){
-					$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']));
+					$_REQUEST['inject_string'] = str_ireplace($keyword, '', $_REQUEST['inject_string']);
 				}
 				break;
 			case 'high':
 				do{
 					$keyword_found = 0;
 					foreach($params as $keyword){
-						$_REQUEST['inject_string'] = str_replace(strtolower($keyword), '', strtolower($_REQUEST['inject_string']), $count);
+						$_REQUEST['inject_string'] = str_ireplace($keyword, '', $_REQUEST['inject_string'], $count);
 						$keyword_found += $count;
 					}	
 				}while ($keyword_found);
